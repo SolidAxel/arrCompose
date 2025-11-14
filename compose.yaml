@@ -20,7 +20,7 @@ services:
       - WIREGUARD_PRIVATE_KEY=${wireguard_private_key}
       - SERVER_COUNTRIES=United States
       - SERVER_CITIES=Los Angeles
-      - UPDATER_PERIOD=24h
+      - UPDATER_PERIOD=12h
       - PORT_FORWARDING_ONLY=on
       - VPN_PORT_FORWARDING=on
       - VPN_PORT_FORWARDING_STATUS_FILE=/tmp/gluetun/forwarded_port
