@@ -177,22 +177,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock # optional, for docker integrations
     restart: unless-stopped
     
-  beszel-agent:
-    image: henrygd/beszel-agent
-    container_name: beszel-agent
-    restart: unless-stopped
-    network_mode: host
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /home/axel/Docker/arr/beszel_agent_data:/var/lib/beszel-agent
-      # monitor other disks / partitions by mounting a folder in /extra-filesystems
-      # - /mnt/disk/.beszel:/extra-filesystems/sda1:ro
-    environment:
-      LISTEN: 45876
-      KEY: ${beszel_ssh}
-      TOKEN: ${beszel_token}
-      HUB_URL: http://192.168.1.132:8090
-      
   gluetun-qbittorrent-port-manager:
     image: jopiermeier/gluetun-qbittorrent-port-manager:latest
     network_mode: service:gluetun
