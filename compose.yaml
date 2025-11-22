@@ -173,7 +173,7 @@ services:
       - TZ=America/Los_Angeles
     user: 1000:1000
     volumes:
-      - /home/axel/Docker/arr/autobrr/config:/config
+      - /home/axel/Docker/arr/autobrr:/config
     ports:
       - 7474:7474
       
