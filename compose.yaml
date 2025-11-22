@@ -164,6 +164,18 @@ services:
       - /home/axel/Docker/arr/notifiarr:/config
       - /var/run/utmp:/var/run/utmp
       - /etc/machine-id:/etc/machine-id
+
+  autobrr:
+    container_name: autobrr
+    image: ghcr.io/autobrr/autobrr:latest
+    restart: unless-stopped
+    environment:
+      - TZ=America/Los_Angeles
+    user: 1000:1000
+    volumes:
+      - /home/axel/Docker/arr/autobrr/config:/config
+    ports:
+      - 7474:7474
       
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
