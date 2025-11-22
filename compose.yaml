@@ -171,7 +171,8 @@ services:
     restart: unless-stopped
     environment:
       - TZ=America/Los_Angeles
-    user: 1000:1000
+      - PUID=1000
+      - PGID=1000
     volumes:
       - /home/axel/Docker/arr/autobrr:/config
     ports:
