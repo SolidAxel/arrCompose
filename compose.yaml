@@ -64,6 +64,8 @@ services:
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin # runtime: nvidia
+    networks: 
+            - caddy
     environment:
       - PUID=1000
       - PGID=1000
@@ -80,6 +82,8 @@ services:
       - homepage.icon=jellyfin.png
       - homepage.href=http://192.168.1.44:8096/
       - homepage.description=Media Player
+      - caddy= jf.axelegarcia.com
+      - caddy.reverse_proxy= "{{upstreams 8096}}"
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:develop
@@ -213,11 +217,29 @@ services:
       interval: 15s
       retries: 3
     restart: unless-stopped
+
+  caddy:
+        image: lucaslorentz/caddy-docker-proxy:latest
+        container_name: caddy
+        ports:
+            - 80:80
+            - 443:443
+        environment:
+            - CADDY_INGRESS_NETWORKS=caddy
+        networks:
+            - caddy
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /home/axel/Docker/arr/Caddy:/data
+        restart: unless-stopped
 volumes:
+  caddy_data: {}
   gluetun-data:
     driver: local
     driver_opts:
       type: tmpfs
       device: tmpfs
       o: size=64m,uid=1000,gid=1000,mode=1777
-networks: {}
+networks: 
+  caddy:
+    external: true
