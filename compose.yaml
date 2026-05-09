@@ -28,7 +28,7 @@ services:
       - gluetun-data:/tmp/gluetun
       
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
+    image: lscr.io/linuxserver/qbittorrent:5.1.4
     container_name: qbittorrent
     environment:
       - PUID=1000
