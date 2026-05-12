@@ -33,7 +33,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Los_Angeles
+      - TZ=${TZ}
       - WEBUI_PORT=8080
     volumes:
       - /home/axel/Docker/arr/qBittorrent/config:/config
@@ -43,12 +43,12 @@ services:
       gluetun:
         condition: service_started
         restart: true
-    labels:
-      - homepage.group=Torrent
-      - homepage.name=qBittorrent
-      - homepage.icon=qbittorrent.png
-      - homepage.href=http://192.168.1.44:8080/
-      - homepage.description=Torrent client
+    # labels:
+    #   - homepage.group=Torrent
+    #   - homepage.name=qBittorrent
+    #   - homepage.icon=qbittorrent.png
+    #   - homepage.href=http://192.168.1.44:8080/
+    #   - homepage.description=Torrent client
     # ports:
     #     - 8080:8080
     #     - 6881:6881
@@ -67,19 +67,19 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Los_Angeles
+      - TZ=${TZ}
     volumes:
       - /home/axel/Docker/arr/Jellyfin/config:/config
       - /mnt/storage/data/media:/data/media
     ports:
       - 8096:8096
     restart: unless-stopped
-    labels:
-      - homepage.group=Media
-      - homepage.name=Jellyfin
-      - homepage.icon=jellyfin.png
-      - homepage.href=http://192.168.1.44:8096/
-      - homepage.description=Media Player
+    # labels:
+    #   - homepage.group=Media
+    #   - homepage.name=Jellyfin
+    #   - homepage.icon=jellyfin.png
+    #   - homepage.href=http://192.168.1.44:8096/
+    #   - homepage.description=Media Player
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:develop
@@ -87,18 +87,18 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Los_Angeles
+      - TZ=${TZ}
     volumes:
       - /home/axel/Docker/arr/Sonarr:/config
       - /mnt/storage/data/:/data
     ports:
       - 8989:8989
-    labels:
-      - homepage.group=Media
-      - homepage.name=Sonarr
-      - homepage.icon=sonarr.png
-      - homepage.href=http://192.168.1.44:8989/
-      - homepage.description=TV Series Grabber
+    # labels:
+    #   - homepage.group=Media
+    #   - homepage.name=Sonarr
+    #   - homepage.icon=sonarr.png
+    #   - homepage.href=http://192.168.1.44:8989/
+    #   - homepage.description=TV Series Grabber
     restart: unless-stopped
     
   radarr:
@@ -107,18 +107,18 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Los_Angeles
+      - TZ=${TZ}
     volumes:
       - /home/axel/Docker/arr/Radarr:/config
       - /mnt/storage/data/:/data
     ports:
       - 7878:7878
-    labels:
-      - homepage.group=Media
-      - homepage.name=Radarr
-      - homepage.icon=radarr.png
-      - homepage.href=http://192.168.1.44:7878/
-      - homepage.description=Movie Grabber
+    # labels:
+    #   - homepage.group=Media
+    #   - homepage.name=Radarr
+    #   - homepage.icon=radarr.png
+    #   - homepage.href=http://192.168.1.44:7878/
+    #   - homepage.description=Movie Grabber
     restart: unless-stopped
     
   prowlarr:
@@ -127,15 +127,15 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Los_Angeles
+      - TZ=${TZ}
     volumes:
       - /home/axel/Docker/arr/prowlarr:/config
-    labels:
-      - homepage.group=Media
-      - homepage.name=Prowlarr
-      - homepage.icon=prowlarr.png
-      - homepage.href=http://192.168.1.44:9696/
-      - homepage.description=Indexer Handler
+    # labels:
+      # - homepage.group=Media
+      # - homepage.name=Prowlarr
+      # - homepage.icon=prowlarr.png
+      # - homepage.href=http://192.168.1.44:9696/
+      # - homepage.description=Indexer Handler
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -148,7 +148,7 @@ services:
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - LOG_HTML=${LOG_HTML:-false}
       - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
-      - TZ=America/Los_Angeles
+      - TZ=${TZ}
     ports:
       - ${PORT:-8191}:8191
     restart: unless-stopped
@@ -165,17 +165,17 @@ services:
       - /var/run/utmp:/var/run/utmp
       - /etc/machine-id:/etc/machine-id
       
-  homepage:
-    image: ghcr.io/gethomepage/homepage:latest
-    container_name: homepage
-    environment:
-      - HOMEPAGE_ALLOWED_HOSTS=192.168.1.44:3000
-    ports:
-      - 3000:3000
-    volumes:
-      - /home/axel/Docker/arr/homepage:/app/config # Make sure your local config directory exists
-      - /var/run/docker.sock:/var/run/docker.sock # optional, for docker integrations
-    restart: unless-stopped
+  # homepage:
+  #   image: ghcr.io/gethomepage/homepage:latest
+  #   container_name: homepage
+  #   environment:
+  #     - HOMEPAGE_ALLOWED_HOSTS=192.168.1.44:3000
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - /home/axel/Docker/arr/homepage:/app/config # Make sure your local config directory exists
+  #     - /var/run/docker.sock:/var/run/docker.sock # optional, for docker integrations
+  #   restart: unless-stopped
     
   gluetun-qbittorrent-port-manager:
     image: jopiermeier/gluetun-qbittorrent-port-manager:latest
@@ -200,7 +200,7 @@ services:
     container_name: seerr
     environment:
       - LOG_LEVEL=debug
-      - TZ=America/Los_Angeles
+      - TZ=${TZ}
       - PORT=5055 #optional
     ports:
       - 5055:5055
@@ -225,7 +225,7 @@ services:
     #    max-size: ${DOCKERLOGGING_MAXSIZE}
     user: 1000:1000
     environment:
-      - TZ=America/Los_Angeles
+      - TZ=${TZ}
     volumes:
       - /home/axel/Docker/arr/autobrr/config:/config
     ports:
