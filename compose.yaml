@@ -288,7 +288,7 @@ services:
       - CADDY_INGRESS_NETWORKS=caddy
     networks:
       - caddy
-    labels;
+    labels:
       caddy: "*.lab.axelegarcia.com"
       caddy.tls.dns: "cloudflare {env.CF_API_TOKEN}"
     volumes:
