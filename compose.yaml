@@ -76,7 +76,7 @@ services:
     restart: unless-stopped
     labels:
       caddy: jf.lab.axelegarcia.com
-      caddy.reverse_proxy: jellyfin:8096
+      caddy.reverse_proxy: "{{upstreams 8096}}"
     #   - homepage.group=Media
     #   - homepage.name=Jellyfin
     #   - homepage.icon=jellyfin.png
@@ -97,7 +97,7 @@ services:
       - 8989:8989
     labels:
       caddy: sonarr.lab.axelegarcia.com
-      caddy.reverse_proxy: sonarr:8989
+      caddy.reverse_proxy: "{{upstreams 8989}}"
     #   - homepage.group=Media
     #   - homepage.name=Sonarr
     #   - homepage.icon=sonarr.png
@@ -119,7 +119,7 @@ services:
       - 7878:7878
     labels:
       caddy: radarr.lab.axelegarcia.com
-      caddy.reverse_proxy: radarr:7878
+      caddy.reverse_proxy: r"{{upstreams 7878}}"
     #   - homepage.group=Media
     #   - homepage.name=Radarr
     #   - homepage.icon=radarr.png
@@ -138,7 +138,7 @@ services:
       - /home/axel/Docker/arr/prowlarr:/config
     labels:
       caddy: prowlarr.lab.axelegarcia.com
-      caddy.reverse_proxy: prowlarr:9096
+      caddy.reverse_proxy: "{{upstreams 9696}}"
       # - homepage.group=Media
       # - homepage.name=Prowlarr
       # - homepage.icon=prowlarr.png
@@ -216,7 +216,7 @@ services:
       - /home/axel/Docker/arr/seerr/config:/app/config
     labels:
       caddy: seerr.lab.axelegarcia.com
-      caddy.reverse_proxy: seerr:5055
+      caddy.reverse_proxy: "{{upstreams 5955}}"
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/status || exit 1
       start_period: 20s
@@ -243,7 +243,7 @@ services:
       - 7474:7474
     labels:
       caddy: autobrr.lab.axelegarcia.com
-      caddy.reverse_proxy: autobrr:7474
+      caddy.reverse_proxy: "{{upstreams 7474}}"
   caddy:
     image: lucaslorentz/caddy-docker-proxy:ci-alpine
     ports:
