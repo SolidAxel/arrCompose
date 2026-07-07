@@ -269,13 +269,12 @@ services:
     build:
       dockerfile_inline: |
         ARG CADDY_VERSION=2.13.1
-        FROM caddy:${CADDY_VERSION}-builder AS builder
+        FROM caddy:$${CADDY_VERSION}-builder AS builder
 
         RUN xcaddy build \
           --with github.com/lucaslorentz/caddy-docker-proxy/v2 \
           --with github.com/caddy-dns/cloudflare
-        ARG CADDY_VERSION=2.13.1
-        FROM caddy:${CADDY_VERSION}-alpine
+        FROM caddy:$${CADDY_VERSION}-alpine
 
         COPY --from=builder /usr/bin/caddy /usr/bin/caddy
 
