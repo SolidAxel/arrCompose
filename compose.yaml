@@ -275,7 +275,7 @@ services:
           --with github.com/lucaslorentz/caddy-docker-proxy/v2 \
           --with github.com/caddy-dns/cloudflare
         ARG CADDY_VERSION=2.13.1
-        FROM caddy:${CADDY_VERSION}-alpine
+        FROM caddy:2.13.1-alpine
 
         COPY --from=builder /usr/bin/caddy /usr/bin/caddy
 
