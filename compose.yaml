@@ -265,7 +265,21 @@ services:
       caddy.reverse_proxy: "{{upstreams 7474}}"
       caddy.tls: "internal"
   caddy:
-    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+    # image: lucaslorentz/caddy-docker-proxy:ci-alpine
+    build:
+      dockerfile_inline: |
+        ARG CADDY_VERSION=2.6.1
+        FROM caddy:${CADDY_VERSION}-builder AS builder
+
+        RUN xcaddy build \
+          --with github.com/lucaslorentz/caddy-docker-proxy/v2 \
+          --with github.com/caddy-dns/cloudflare
+      
+        FROM caddy:${CADDY_VERSION}-alpine
+
+        COPY --from=builder /usr/bin/caddy /usr/bin/caddy
+
+        CMD ["caddy", "docker-proxy"]
     ports:
       - 80:80
       - 443:443/tcp
@@ -274,6 +288,9 @@ services:
       - CADDY_INGRESS_NETWORKS=caddy
     networks:
       - caddy
+    labels;
+      caddy: "*.lab.axelegarcia.com"
+      caddy.tls.dns: "cloudflare {env.CF_API_TOKEN}"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /home/axel/Docker/arr/caddy:/data
