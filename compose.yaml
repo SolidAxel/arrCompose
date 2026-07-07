@@ -263,13 +263,13 @@ services:
     labels:
       caddy: autobrr.lab.axelegarcia.com
       caddy.reverse_proxy: "{{upstreams 7474}}"
-      caddy.tls.dns: "cloudflare ${CF_API_TOKEN}"
+      caddy.tls.dns: cloudflare ${CF_API_TOKEN}
       # caddy.tls: "internal"
   caddy:
     # image: lucaslorentz/caddy-docker-proxy:ci-alpine
     build:
       dockerfile_inline: |
-        ARG CADDY_VERSION=2.6.4
+        ARG CADDY_VERSION=2.11.4
         FROM caddy:$${CADDY_VERSION}-builder AS builder
 
         RUN xcaddy build \
