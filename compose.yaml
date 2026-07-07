@@ -288,8 +288,7 @@ services:
     networks:
       - caddy
     labels:
-      caddy: *.lab.axelegarcia.com
-      caddy.tls.dns: cloudflare ${CF_API_TOKEN}
+        caddy.email: axelegar@gmail.com
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /home/axel/Docker/arr/caddy:/data
