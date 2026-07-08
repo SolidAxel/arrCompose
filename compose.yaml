@@ -14,6 +14,10 @@ services:
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
+    labels:
+      caddy: qbit.lab.axelegarcia.com
+      caddy.reverse_proxy: "{{upstreams 8080}}"
+      caddy.tls.dns: cloudflare ${CF_API_TOKEN}
     networks:
       - caddy
     environment:
