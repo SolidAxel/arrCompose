@@ -81,7 +81,7 @@ services:
     labels:
       caddy: jf.lab.axelegarcia.com
       caddy.reverse_proxy: "{{upstreams 8096}}"
-      caddy.tls: "internal"
+      caddy.tls.dns: cloudflare ${CF_API_TOKEN}
     #   - homepage.group=Media
     #   - homepage.name=Jellyfin
     #   - homepage.icon=jellyfin.png
@@ -105,7 +105,7 @@ services:
     labels:
       caddy: sonarr.lab.axelegarcia.com
       caddy.reverse_proxy: "{{upstreams 8989}}"
-      caddy.tls: "internal"
+      caddy.tls.dns: cloudflare ${CF_API_TOKEN}
     #   - homepage.group=Media
     #   - homepage.name=Sonarr
     #   - homepage.icon=sonarr.png
@@ -130,7 +130,7 @@ services:
     labels:
       caddy: radarr.lab.axelegarcia.com
       caddy.reverse_proxy: "{{upstreams 7878}}"
-      caddy.tls: "internal"
+      caddy.tls.dns: cloudflare ${CF_API_TOKEN}
     #   - homepage.group=Media
     #   - homepage.name=Radarr
     #   - homepage.icon=radarr.png
@@ -152,7 +152,7 @@ services:
     labels:
       caddy: prowlarr.lab.axelegarcia.com
       caddy.reverse_proxy: "{{upstreams 9696}}"
-      caddy.tls: "internal"
+      caddy.tls.dns: cloudflare ${CF_API_TOKEN}
       # - homepage.group=Media
       # - homepage.name=Prowlarr
       # - homepage.icon=prowlarr.png
@@ -233,7 +233,8 @@ services:
     labels:
       caddy: seerr.lab.axelegarcia.com
       caddy.reverse_proxy: "{{upstreams 5055}}"
-      caddy.tls: "internal"
+      caddy.tls.dns: cloudflare ${CF_API_TOKEN}
+
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/status || exit 1
       start_period: 20s
