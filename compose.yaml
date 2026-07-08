@@ -289,7 +289,7 @@ services:
     networks:
       - caddy
     labels:
-        caddy: "*.lab.axelegarcia.com"
+        caddy: "*.axelegarcia.com"
         caddy.reverse_proxy: "{{upstreams}}"
         caddy.tls.dns: cloudflare ${CF_API_TOKEN}
         # caddy.email: axelegar@gmail.com
