@@ -191,17 +191,17 @@ services:
       - /var/run/utmp:/var/run/utmp
       - /etc/machine-id:/etc/machine-id
       
-  homepage:
-    image: ghcr.io/gethomepage/homepage:latest
-    container_name: homepage
-    environment:
-      - HOMEPAGE_ALLOWED_HOSTS=10.10.10.44:3000
-    ports:
-      - 3000:3000
-    volumes:
-      - /home/axel/Docker/arr/homepage:/app/config # Make sure your local config directory exists
-      - /var/run/docker.sock:/var/run/docker.sock # optional, for docker integrations
-    restart: unless-stopped
+  # homepage:
+  #   image: ghcr.io/gethomepage/homepage:latest
+  #   container_name: homepage
+  #   environment:
+  #     - HOMEPAGE_ALLOWED_HOSTS=10.10.10.44:3000
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - /home/axel/Docker/arr/homepage:/app/config # Make sure your local config directory exists
+  #     - /var/run/docker.sock:/var/run/docker.sock # optional, for docker integrations
+  #   restart: unless-stopped
     
   gluetun-qbittorrent-port-manager:
     image: jopiermeier/gluetun-qbittorrent-port-manager:latest
